@@ -49,6 +49,7 @@ RUN chown -R www-data:www-data sites/default
 COPY portfolio profiles/
 
 # Preparing DB server for install Drupal
+RUN service mysql start
 RUN mysql -u root -proot -e "CREATE USER '$db_user'@'localhost' IDENTIFIED BY '$db_password'"
 RUN mysql -u root -proot -e "GRANT ALL PRIVILEGES ON $db_user.* TO '$db_user'@'localhost'"
 RUN mysql -u root -proot -e "FLUSH PRIVILEGES"
