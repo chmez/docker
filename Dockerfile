@@ -46,7 +46,7 @@ WORKDIR /var/www/html
 RUN rm LICENSE.txt README.txt
 RUN mv example.gitignore .gitignore
 RUN chown -R www-data:www-data sites/default
-COPY portfolio profiles
+COPY portfolio profiles/
 
 # Preparing DB server for install Drupal
 RUN mysql -u root -proot -e "CREATE USER '$db_user'@'localhost' IDENTIFIED BY '$db_password'"
