@@ -1,0 +1,20 @@
+name: Portfolio
+type: profile
+description: 'All my works.'
+version: VERSION
+core: 8.x
+dependencies:
+  - field_ui
+  - node
+  - block
+  - dblog
+  - help
+  - config
+  - breakpoint
+  - toolbar
+  - views_ui
+  - admin_toolbar
+  - admin_toolbar_tools
+themes:
+  - seven
+  - bootstrap

@@ -1,0 +1,18 @@
+api: 2
+
+core: "8.x"
+
+defaults:
+  projects:
+    overwrite: TRUE
+
+includes:
+  - "core.make.yml"
+
+projects:
+  admin_toolbar:
+    type: "module"
+    version: "1.17"
+  bootstrap:
+    type: "theme"
+    version: "3.0-rc2"
