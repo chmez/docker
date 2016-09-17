@@ -1,11 +1,6 @@
 # Download OS image
 FROM ubuntu:16.10
 
-# Set arguments
-ARG email=chmez070@gmail.com
-ARG db_user=alexgor_portfoli
-ARG db_password=394zqcdq
-
 # Update packages
 RUN apt-get update
 
@@ -50,12 +45,12 @@ COPY portfolio profiles/
 
 # Preparing DB server for install Drupal
 RUN service mysql start
-RUN mysql -u root -proot -e "CREATE USER '$db_user'@'localhost' IDENTIFIED BY '$db_password'"
-RUN mysql -u root -proot -e "GRANT ALL PRIVILEGES ON $db_user.* TO '$db_user'@'localhost'"
+RUN mysql -u root -proot -e "CREATE USER 'alexgor_portfoli'@'localhost' IDENTIFIED BY '394zqcdq'"
+RUN mysql -u root -proot -e "GRANT ALL PRIVILEGES ON alexgor_portfoli.* TO 'alexgor_portfoli'@'localhost'"
 RUN mysql -u root -proot -e "FLUSH PRIVILEGES"
 
 # Install Drupal
-RUN drush si portfolio --db-url=mysql://$db_user:$db_password@localhost:3306/$db_user --account-name=$db_user --account-pass=$db_password --account-mail=$email --locale=uk --site-name=Portfolio --site-mail=$email -y
+RUN drush si portfolio --db-url=mysql://alexgor_portfoli:394zqcdq@localhost:3306/alexgor_portfoli --account-name=alexgor_portfoli --account-pass=394zqcdq --account-mail=chmez070@gmail.com --locale=uk --site-name=Portfolio --site-mail=chmez070@gmail.com -y
 RUN drush cr
 
 # Sync site root directory with local machine
