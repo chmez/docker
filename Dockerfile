@@ -32,7 +32,7 @@ RUN composer global require drush/drush:8.*
 # Download Drupal 8 core and contrib modules
 ENV PATH="/root/.composer/vendor/bin:${PATH}"
 WORKDIR /var/www/html
-ADD make/*.make.yml
+COPY make/*.make.yml /var/www/html
 RUN drush make profile.make.yml --prepare-install --overwrite -y
 RUN rm *.make.yml
 
