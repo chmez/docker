@@ -31,7 +31,8 @@ RUN composer global require drush/drush:8.*
 
 # Download Drupal 8 core and contrib modules
 ENV PATH="/root/.composer/vendor/bin:${PATH}"
-COPY make/*.make.yml .
+WORKDIR /var/www/html
+ADD make/*.make.yml
 RUN drush make profile.make.yml --prepare-install --overwrite -y
 RUN rm *.make.yml
 
@@ -42,12 +43,10 @@ RUN a2enmod rewrite
 RUN a2enmod headers
 
 # Preparing file system for install Drupal
-WORKDIR /var/www/html
 RUN rm LICENSE.txt README.txt
 RUN mv example.gitignore .gitignore
 RUN chown -R www-data:www-data sites/default
-RUN mkdir profiles/portfolio
-COPY portfolio/ profiles/portfolio/
+COPY portfolio profiles/
 
 # Preparing DB server for install Drupal
 RUN mysql -u root -proot -e "CREATE USER '$db_user'@'localhost' IDENTIFIED BY '$db_password'"
