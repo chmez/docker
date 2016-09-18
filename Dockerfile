@@ -19,13 +19,13 @@ RUN usermod -d /usr/lib/mysql mysql
 RUN apt-get install -y php7.0 libapache2-mod-php7.0 php7.0-mysql
 
 # Install Drush 8
-RUN apt-get install -y php7.0-zip php7.0-xml curl git
+RUN apt-get install -y php7.0-zip php7.0-xml curl
 RUN curl -sS https://getcomposer.org/installer | php
 RUN mv composer.phar /usr/local/bin/composer
 RUN composer global require drush/drush:8.*
 
 # Preparing web server for install Drupal
-RUN apt-get install -y php7.0-gd php7.0-mbstring
+RUN apt-get install -y php7.0-gd
 COPY 000-default.conf /etc/apache2/sites-available
 RUN a2enmod rewrite
 RUN a2enmod headers
@@ -36,8 +36,13 @@ WORKDIR /var/www/html
 COPY id_rsa id_rsa.pub known_hosts /root/.ssh/
 RUN chmod 600 /root/.ssh/id_rsa
 RUN rm -rf *
+RUN apt-get install -y git wget
 RUN git clone git@bitbucket.org:chmez070/portfolio-site.git .
-RUN composer install
+RUN wget https://ftp.drupal.org/files/projects/drupal-8.1.9.tar.gz
+RUN tar zxfv drupal-8.1.9.tar.gz
+RUN mv drupal-8.1.9/vendor .
+RUN mv drupal-8.1.9/core/assets core
+RUN rm -rf drupal-8.1.9*
 
 # Sync site root directory with local machine
 VOLUME "/var/www/html"
