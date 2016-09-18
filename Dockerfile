@@ -25,12 +25,13 @@ RUN mv composer.phar /usr/local/bin/composer
 RUN composer global require drush/drush:8.*
 
 # Preparing web server for install Drupal
-RUN apt-get install -y php7.0-gd
+RUN apt-get install -y php7.0-gd php7.0-mbstring
 COPY 000-default.conf /etc/apache2/sites-available
 RUN a2enmod rewrite
 RUN a2enmod headers
 ENV PATH="/root/.composer/vendor/bin:${PATH}"
 WORKDIR /var/www/html
+RUN composer install
 
 # Sync site root directory with local machine
 VOLUME "/var/www/html"
