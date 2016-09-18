@@ -24,18 +24,13 @@ RUN curl -sS https://getcomposer.org/installer | php
 RUN mv composer.phar /usr/local/bin/composer
 RUN composer global require drush/drush:8.*
 
-# Download Drupal 8 core and contrib modules
-ENV PATH="/root/.composer/vendor/bin:${PATH}"
-WORKDIR /var/www/html
-COPY make/*.make.yml /var/www/html/
-RUN drush make profile.make.yml --prepare-install --overwrite -y
-RUN rm *.make.yml
-
 # Preparing web server for install Drupal
 RUN apt-get install -y php7.0-gd
 COPY 000-default.conf /etc/apache2/sites-available
 RUN a2enmod rewrite
 RUN a2enmod headers
+ENV PATH="/root/.composer/vendor/bin:${PATH}"
+WORKDIR /var/www/html
 
 # Sync site root directory with local machine
 VOLUME "/var/www/html"
