@@ -31,7 +31,6 @@ RUN a2enmod rewrite
 RUN a2enmod headers
 ENV PATH="/root/.composer/vendor/bin:${PATH}"
 WORKDIR /var/www/html
-RUN composer install
 
 # Sync site root directory with local machine
 VOLUME "/var/www/html"
