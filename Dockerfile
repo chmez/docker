@@ -43,14 +43,8 @@ RUN mv example.gitignore .gitignore
 RUN chown -R www-data:www-data sites/default
 COPY portfolio profiles/
 
-# Preparing DB server for install Drupal
-RUN service mysql start
-RUN mysql -u root -proot -e "CREATE USER 'alexgor_portfoli'@'localhost' IDENTIFIED BY '394zqcdq'"
-RUN mysql -u root -proot -e "GRANT ALL PRIVILEGES ON alexgor_portfoli.* TO 'alexgor_portfoli'@'localhost'"
-RUN mysql -u root -proot -e "FLUSH PRIVILEGES"
-
 # Install Drupal
-RUN drush si portfolio --db-url=mysql://alexgor_portfoli:394zqcdq@localhost:3306/alexgor_portfoli --account-name=alexgor_portfoli --account-pass=394zqcdq --account-mail=chmez070@gmail.com --locale=uk --site-name=Portfolio --site-mail=chmez070@gmail.com -y
+RUN drush si portfolio --db-url=mysql://root:root@localhost:3306/alexgor_portfoli --account-name=alexgor_portfoli --account-pass=394zqcdq --account-mail=chmez070@gmail.com --locale=uk --site-name=Portfolio --site-mail=chmez070@gmail.com -y
 RUN drush cr
 
 # Sync site root directory with local machine
