@@ -36,20 +36,6 @@ RUN apt-get install -y php7.0-gd
 COPY 000-default.conf /etc/apache2/sites-available
 RUN a2enmod rewrite
 RUN a2enmod headers
-RUN service apache2 start
-
-# Preparing DB server for install Drupal
-RUN service mysql start
-
-# Preparing file system for install Drupal
-RUN rm LICENSE.txt README.txt
-RUN mv example.gitignore .gitignore
-RUN chown -R www-data:www-data sites/default
-COPY portfolio profiles/
-
-# Install Drupal
-RUN drush si portfolio --db-url=mysql://root:root@localhost:3306/alexgor_portfoli --db-su=root --db-su-pw=root --account-name=alexgor_portfoli --account-pass=394zqcdq --account-mail=chmez070@gmail.com --locale=uk --site-name=Portfolio --site-mail=chmez070@gmail.com -y
-RUN drush cr
 
 # Sync site root directory with local machine
 VOLUME "/var/www/html"
