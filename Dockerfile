@@ -36,6 +36,10 @@ RUN apt-get install -y php7.0-gd
 COPY 000-default.conf /etc/apache2/sites-available
 RUN a2enmod rewrite
 RUN a2enmod headers
+RUN service apache2 start
+
+# Preparing DB server for install Drupal
+RUN service mysql start
 
 # Preparing file system for install Drupal
 RUN rm LICENSE.txt README.txt
