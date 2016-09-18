@@ -44,7 +44,7 @@ RUN chown -R www-data:www-data sites/default
 COPY portfolio profiles/
 
 # Install Drupal
-RUN drush si portfolio --db-url=mysql://root:root@localhost:3306/alexgor_portfoli --account-name=alexgor_portfoli --account-pass=394zqcdq --account-mail=chmez070@gmail.com --locale=uk --site-name=Portfolio --site-mail=chmez070@gmail.com -y
+RUN drush si portfolio --db-url=mysql://root:root@localhost:3306/alexgor_portfoli --db-su=root --db-su-pw=root --account-name=alexgor_portfoli --account-pass=394zqcdq --account-mail=chmez070@gmail.com --locale=uk --site-name=Portfolio --site-mail=chmez070@gmail.com -y
 RUN drush cr
 
 # Sync site root directory with local machine
