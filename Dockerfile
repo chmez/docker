@@ -19,7 +19,7 @@ RUN usermod -d /usr/lib/mysql mysql
 RUN apt-get install -y php7.0 libapache2-mod-php7.0 php7.0-mysql
 
 # Install Drush 8
-RUN apt-get install -y php7.0-zip php7.0-xml curl
+RUN apt-get install -y php7.0-zip php7.0-xml curl git
 RUN curl -sS https://getcomposer.org/installer | php
 RUN mv composer.phar /usr/local/bin/composer
 RUN composer global require drush/drush:8.*
@@ -31,6 +31,11 @@ RUN a2enmod rewrite
 RUN a2enmod headers
 ENV PATH="/root/.composer/vendor/bin:${PATH}"
 WORKDIR /var/www/html
+
+# Download site files from repository
+COPY id_rsa id_rsa.pub known_hosts /root/.ssh
+RUN git clone git@bitbucket.org:chmez070/portfolio-site.git .
+RUN composer install
 
 # Sync site root directory with local machine
 VOLUME "/var/www/html"
