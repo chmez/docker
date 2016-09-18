@@ -34,7 +34,7 @@ WORKDIR /var/www/html
 
 # Download site files from repository
 COPY id_rsa id_rsa.pub known_hosts /root/.ssh/
-RUN rm - rf *
+RUN rm -rf *
 RUN git clone git@bitbucket.org:chmez070/portfolio-site.git .
 RUN composer install
 
