@@ -38,11 +38,11 @@ RUN chmod 600 /root/.ssh/id_rsa
 RUN rm -rf *
 RUN apt-get install -y git wget
 RUN git clone git@bitbucket.org:chmez070/portfolio-site.git .
-RUN wget https://ftp.drupal.org/files/projects/drupal-8.1.9.tar.gz
-RUN tar zxfv drupal-8.1.9.tar.gz
-RUN mv drupal-8.1.9/vendor .
-RUN mv drupal-8.1.9/core/assets core
-RUN rm -rf drupal-8.1.9*
+RUN wget https://ftp.drupal.org/files/projects/drupal-8.1.10.tar.gz
+RUN tar zxfv drupal-8.1.10.tar.gz
+RUN mv drupal-8.1.10/vendor .
+RUN mv drupal-8.1.10/core/assets core
+RUN rm -rf drupal-8.1.10*
 
 # Sync site root directory with local machine
 VOLUME "/var/www/html"
