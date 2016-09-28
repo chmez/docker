@@ -33,11 +33,9 @@ ENV PATH="/root/.composer/vendor/bin:${PATH}"
 WORKDIR /var/www/html
 
 # Download site files from repository
-COPY id_rsa id_rsa.pub known_hosts /root/.ssh/
-RUN chmod 600 /root/.ssh/id_rsa
 RUN rm -rf *
 RUN apt-get install -y git wget
-RUN git clone git@bitbucket.org:chmez070/portfolio-site.git .
+RUN git clone https://github.com/chmez/portfolio-site.git .
 RUN wget https://ftp.drupal.org/files/projects/drupal-8.1.10.tar.gz
 RUN tar zxfv drupal-8.1.10.tar.gz
 RUN mv drupal-8.1.10/vendor .
