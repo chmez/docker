@@ -35,7 +35,7 @@ WORKDIR /var/www/html
 # Download site files from repository
 RUN rm -rf *
 RUN apt-get install -y git wget
-RUN git clone https://github.com/chmez/portfolio-site.git .
+RUN git clone https://github.com/chmez/portfolio.git .
 RUN wget https://ftp.drupal.org/files/projects/drupal-8.1.10.tar.gz
 RUN tar zxfv drupal-8.1.10.tar.gz
 RUN mv drupal-8.1.10/vendor .
