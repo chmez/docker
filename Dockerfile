@@ -25,7 +25,7 @@ RUN mv composer.phar /usr/local/bin/composer
 RUN composer global require drush/drush:8.*
 
 # Preparing web server for install Drupal
-RUN apt-get install -y php7.0-gd
+RUN apt-get install -y php7.0-gd sendmail
 COPY 000-default.conf /etc/apache2/sites-available
 RUN a2enmod rewrite
 RUN a2enmod headers
