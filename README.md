@@ -1,2 +1,2 @@
-Files for build Docker images.
+Portfolio site Docker image.
 
